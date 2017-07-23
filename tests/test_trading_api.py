@@ -1,12 +1,15 @@
 import os
-import yaml
+
 import pytest
-from ebayapi import TradingAPI, EbayError
 import requests
+import yaml
+
+from ebayapi import TradingAPI, EbayError
 
 
 @pytest.fixture
 def config():
+    """Get config fixture."""
     conf = os.environ.get("EBAY_CONF", "ebay-conf.yaml")
     config = yaml.load(open(conf))
     return config['api.ebay.com']
@@ -14,17 +17,19 @@ def config():
 
 @pytest.fixture
 def api(config):
-    return TradingAPI(config)
+    """Get Trading API instance."""
+    return TradingAPI(config['appid'], config['version'], config['siteid'])
 
 
-def test_valid_request(api: TradingAPI):
+def test_get_item_transactions(api, config):
+    """Test valid GetItemTransactions request."""
     request = api.request("GetItemTransactions", {
         "RequesterCredentials": {
-            "eBayAuthToken": api.config['token']
+            "eBayAuthToken": config['token']
         },
         "ItemID": 1
     })
-    response = requests.request(request.method, request.full_url,
+    response = requests.request(request.method, request.url,
                                 headers=request.headers, data=request.data)
     assert response.status_code == 200
     try:
