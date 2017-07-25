@@ -1,0 +1,26 @@
+language: python
+python:
+  - '2.6'
+  - '2.7'
+  - '3.3'
+  - '3.4'
+  - '3.5'
+  - '3.6'
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_3147568fb981_key -iv $encrypted_3147568fb981_iv
+    -in ebay-conf.yaml.enc -out ebay-conf.yaml -d
+
+install:
+  - pip install -r requirements.txt
+  - pip install -r test_requirements.txt
+
+script: pytest
+
+deploy:
+  provider: pypi
+  user: itayazolay
+  password:
+    secure: TAnjnVJkTscjD/LkHNa7ItA9BAkcLskRxiCY4u0r5256EcxnCt9xo8oT2LBobhBvwUnkUpHVL+UqZiTLZ2aKu7AFRh/m1KPbwSBFoZisX8zsEbQNvv0e8Bgw0YMoLwO3Argn+vyoUk7zWomgdzzYtbNs1i3bt7v8GfU1YOu23I9ckbeLJ+AJhxaED8rF8X+67R4RN7crsVugxWHI/Y1AYBu68Qv/4N2lAbyfpIfFLfIDTrzGD/KZoUqJ8bkDFmZs25TeLSTs1sPm+rgRyXk/sIPtJZdD9KfVPXwjg8lFSbBXFrRkvf0fzJ2PO6tLDsOJbIjf5rAG6BaFlnfePWSXZYDpbTPj2eWr/a519UHJ34qinN9cxOjFX5LD/Hph+jLdvBu3soCRWEH/rMYZYPh+PYK0BkatoWBvgH+hAmKrW1NBjZwcYU8ZrmxA3mk2lG8GHBvxY31Z7NkKB9Q6T7keRtWsDlaenE4omXZkLktLyuOnKaTejSyy0uIvNa51fWMDNhIMu56WAcm6be1wPlBZqYsynOkwlhYSM2SDw/kG231C5QcCTgPMgZBUScW25EhyqB74itqmjHfPKH0cmByvKaN7900fFTZV8NEGj9oO+rvv0YLTPOWcIPhxDh+ggPij0zymE3wwQzBh4V/5q9kpwZTfcYj7VJEgtGhmXUCBNxA=
+  on:
+    tags: true

@@ -1,4 +1,6 @@
 from .api import API, EbayError, Request
-from ebayapi.finding import FindingAPI
-from ebayapi.shopping import ShoppingAPI
-from ebayapi.trading import TradingAPI
+from .finding import FindingAPI
+from .shopping import ShoppingAPI
+from .trading import TradingAPI
+
+__version__ = "0.1"

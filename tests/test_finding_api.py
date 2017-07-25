@@ -1,5 +1,4 @@
 import os
-from urllib.parse import quote
 
 import pytest
 import requests
@@ -19,7 +18,9 @@ def config():
 @pytest.fixture
 def api(config):
     """Get Trading API instance."""
-    return FindingAPI(config['appid'], config['version'])
+    api = FindingAPI(config['appid'], config['version'])
+    api.url = "http://svcs.sandbox.ebay.com/services/search/FindingService/v1"
+    return api
 
 
 def test_find_by_keywords(api):

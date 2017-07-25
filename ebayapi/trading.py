@@ -11,10 +11,7 @@ class TradingAPI(API):
     def __init__(self, app_id, version, site_id, **config):
         super().__init__(app_id, version, **config)
         self.site_id = site_id
-
-    @property
-    def url(self) -> str:
-        return "https://api.ebay.com/ws/api.dll"
+        self.url = "https://api.ebay.com/ws/api.dll"
 
     def headers(self, call_name: str) -> dict:
         headers = super(TradingAPI, self).headers(call_name)

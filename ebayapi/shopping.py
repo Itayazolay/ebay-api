@@ -10,9 +10,9 @@ class ShoppingAPI(API):
     Shopping API Request implementation.
     """
 
-    @property
-    def url(self) -> str:
-        return "http://open.api.ebay.com/shopping"
+    def __init__(self, app_id, version, **config):
+        super().__init__(app_id, version, **config)
+        self.url = "http://open.api.ebay.com/shopping"
 
     def headers(self, call_name: str) -> dict:
         headers = super(ShoppingAPI, self).headers(call_name)

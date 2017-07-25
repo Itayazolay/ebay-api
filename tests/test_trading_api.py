@@ -18,7 +18,9 @@ def config():
 @pytest.fixture
 def api(config):
     """Get Trading API instance."""
-    return TradingAPI(config['appid'], config['version'], config['siteid'])
+    api = TradingAPI(config['appid'], config['version'], config['siteid'])
+    api.url = "https://api.sandbox.ebay.com/ws/api.dll"
+    return api
 
 
 def test_get_item_transactions(api, config):

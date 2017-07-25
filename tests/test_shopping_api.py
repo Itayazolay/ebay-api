@@ -18,12 +18,14 @@ def config():
 @pytest.fixture
 def api(config):
     """Get Trading API instance."""
-    return ShoppingAPI(config['appid'], config['version'])
+    api = ShoppingAPI(config['appid'], config['version'])
+    api.url = "http://open.api.sandbox.ebay.com/shopping"
+    return api
 
 
 def test_get_multiple_items(api):
     """Test get multiple items request."""
-    items = [292188846779, 292187436212]
+    items = [110211142557, 110211409131]
     req = api.request("GetMultipleItems", {"ItemID": items})
     response = requests.request(req.method, req.url, headers=req.headers, data=req.data, params=req.params)
     response = api.parse(response.content)

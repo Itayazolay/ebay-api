@@ -7,6 +7,10 @@ EM = objectify.ElementMaker(annotate=False)
 
 
 class FindingAPI(API):
+    def __init__(self, app_id, version, **config):
+        super().__init__(app_id, version, **config)
+        self.url = "http://svcs.ebay.com/services/search/FindingService/v1"
+
     def headers(self, call_name):
         headers = {}
         headers.update({
@@ -27,10 +31,6 @@ class FindingAPI(API):
             raise EbayError(response['Errors']['ErrorClassification'],
                             errors=response['Errors'])
         return response
-
-    @property
-    def url(self):
-        return "http://svcs.ebay.com/services/search/FindingService/v1"
 
     def request(self, call_name, data):
         """

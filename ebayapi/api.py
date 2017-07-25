@@ -31,13 +31,7 @@ class API:
         self.app_id = app_id
         self.version = version
         self.config = config
-
-    @property
-    def url(self) -> str:
-        """
-        :return: Url for the api endpoint.
-        """
-        pass
+        self.url = ""
 
     def headers(self, call_name):
         """
