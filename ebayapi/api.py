@@ -64,7 +64,7 @@ class API:
         return Request(method="POST", url=self.url, data=data,
                        headers=self.headers(call_name))
 
-    def parse(self, response) -> dict:
+    def parse(self, response):
         """
         Parse api response data.
 

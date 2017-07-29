@@ -13,7 +13,7 @@ class TradingAPI(API):
         self.site_id = site_id
         self.url = "https://api.ebay.com/ws/api.dll"
 
-    def headers(self, call_name: str) -> dict:
+    def headers(self, call_name):
         headers = super(TradingAPI, self).headers(call_name)
         headers.update({
             "X-EBAY-API-COMPATIBILITY-LEVEL": str(self.version),
@@ -22,7 +22,7 @@ class TradingAPI(API):
         })
         return headers
 
-    def parse(self, response) -> dict:
+    def parse(self, response):
         response = super().parse(response)
         if response['Ack'] == "Failure":
             raise EbayError(response['Errors']['ErrorClassification'],

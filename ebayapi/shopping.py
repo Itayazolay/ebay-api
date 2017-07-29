@@ -14,7 +14,7 @@ class ShoppingAPI(API):
         super().__init__(app_id, version, **config)
         self.url = "http://open.api.ebay.com/shopping"
 
-    def headers(self, call_name: str) -> dict:
+    def headers(self, call_name):
         headers = super(ShoppingAPI, self).headers(call_name)
         headers.update({
             "X-EBAY-API-VERSION": str(self.version),
@@ -22,7 +22,7 @@ class ShoppingAPI(API):
         })
         return headers
 
-    def parse(self, response) -> dict:
+    def parse(self, response):
         response = super().parse(response)
         if response['Ack'] == "Failure":
             raise EbayError(response['Errors']['ErrorClassification'], errors=response['Errors'])

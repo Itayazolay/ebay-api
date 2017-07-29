@@ -3,7 +3,16 @@ from lxml import objectify
 EM = objectify.ElementMaker(annotate=False)
 
 
-def dict2xml(root: objectify.Element, data: dict):
+def dict2xml(root, data):
+    """
+    Insert dict to root xml as xml format.
+
+    :param root: XML root element.
+    :type root: objectify.Element
+    :param dict data: Data to insert to xml.
+    :return: XML tree.
+    :rtype: objectify.Element
+    """
     for key, value in data.items():
         if isinstance(value, dict):
             sub_root = getattr(EM, key)()
@@ -27,7 +36,15 @@ def dict2xml(root: objectify.Element, data: dict):
     return root
 
 
-def xml2dict(root: objectify.Element):
+def xml2dict(root):
+    """
+    Convert ebay xml to dict.
+
+    :param root: XML root element.
+    :type root: objectify.Element
+    :return: XML data as dict.
+    :rtype: dict
+    """
     data = {}
     namespace = root.nsmap.get(None, "")
     clean_tag = lambda tag: tag.replace("{%s}" % namespace, "")
